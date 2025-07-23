@@ -3,7 +3,7 @@
 Um conversor de moedas simples e moderno construído com **Vue 3**, **Vite** e **Bootstrap 5**, com suporte multilíngue (🇵🇹/🇬🇧) e bandeiras para cada moeda.
 
 
-🌐 Live Demo: andre-aportfolio.netlify.app
+🌐 Live Demo: https://minimalist-currency-converter.netlify.app/
 
 
 ## ✨ Funcionalidades
