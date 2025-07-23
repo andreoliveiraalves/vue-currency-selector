@@ -7,9 +7,11 @@
       <h2 class="title">{{ $t('convert.title') }}</h2>
 
       <div class="converter-row">
-        <div class="input-block">
-          <AmountInput v-model="amount" id="amount" />
-          <CurrencySelect v-model="fromCurrency" />
+        <div class="converter-group">
+          <div class="input-block">
+            <AmountInput v-model="amount" id="amount" />
+            <CurrencySelect v-model="fromCurrency" />
+          </div>
           <div class="flag-wrapper">
             <img class="flag" :src="getFlagUrl(fromCurrency)" :alt="`${fromCurrency} flag`" />
           </div>
@@ -17,15 +19,26 @@
 
         <button class="switch-btn" @click="switchCurrencies">⇄</button>
 
-        <div class="input-block">
-          <AmountInput v-model="convertedAmountInput" />
-          <CurrencySelect v-model="toCurrency" />
+        <div class="converter-group">
+          <div class="input-block">
+            <AmountInput v-model="convertedAmountInput" />
+            <CurrencySelect v-model="toCurrency" />
+          </div>
           <div class="flag-wrapper">
             <img class="flag" :src="getFlagUrl(toCurrency)" :alt="`${toCurrency} flag`" />
           </div>
         </div>
       </div>
     </div>
+    <a href="https://github.com/andreoliveiraalves/vue-currency-selector" target="_blank" rel="noopener"
+      class="github-link" aria-label="Ver repositório no GitHub">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"
+        class="github-icon">
+        <path
+          d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.95c.58.1.79-.25.79-.56v-2.03c-3.2.7-3.87-1.54-3.87-1.54a3.05 3.05 0 0 0-1.28-1.69c-1.05-.72.08-.71.08-.71a2.43 2.43 0 0 1 1.77 1.19 2.46 2.46 0 0 0 3.36.96 2.47 2.47 0 0 1 .73-1.54c-2.55-.29-5.23-1.27-5.23-5.63a4.41 4.41 0 0 1 1.17-3.05 4.1 4.1 0 0 1 .11-3.01s.96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0C17.9 5.09 18.86 5.4 18.86 5.4a4.1 4.1 0 0 1 .11 3.01 4.41 4.41 0 0 1 1.17 3.05c0 4.37-2.69 5.34-5.25 5.62a2.77 2.77 0 0 1 .79 2.15v3.18c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z" />
+      </svg>
+    </a>
+
   </div>
 </template>
 
@@ -128,6 +141,23 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 640px) {
+  .converter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+
+  .input-block {
+    width: 100%;
+  }
+
+  .switch-btn {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+}
+
 .main-container {
   position: relative;
   min-height: 100vh;
@@ -145,7 +175,7 @@ export default {
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
   z-index: 1;
   text-align: center;
@@ -262,5 +292,36 @@ export default {
   scale: 1.5;
   border-radius: 1px;
 
+}
+
+.converter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 50px;
+  border-radius: 15px;
+  gap: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.github-link {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.github-link:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.github-icon {
+  width: 32px;
+  height: 32px;
+  fill: #ffffff;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
 }
 </style>
