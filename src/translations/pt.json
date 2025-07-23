@@ -31,5 +31,8 @@
     "TRY": "Lira Turca",
     "USD": "Dólar dos Estados Unidos",
     "ZAR": "Rand Sul-Africano"
+  },
+  "convert": {
+    "title": "Conversor de Moedas"
   }
 }

@@ -31,5 +31,8 @@
     "TRY": "Turkish Lira",
     "USD": "United States Dollar",
     "ZAR": "South African Rand"
+  },
+  "convert": {
+    "title": "Currency Converter"
   }
 }
