@@ -138,7 +138,7 @@ export default {
 <style scoped>
 .main-container {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;
