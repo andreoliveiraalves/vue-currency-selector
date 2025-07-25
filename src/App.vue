@@ -30,15 +30,7 @@
         </div>
       </div>
     </div>
-    <a href="https://github.com/andreoliveiraalves/vue-currency-selector" target="_blank" rel="noopener"
-      class="github-link" aria-label="Ver repositório no GitHub">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"
-        class="github-icon">
-        <path
-          d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.95c.58.1.79-.25.79-.56v-2.03c-3.2.7-3.87-1.54-3.87-1.54a3.05 3.05 0 0 0-1.28-1.69c-1.05-.72.08-.71.08-.71a2.43 2.43 0 0 1 1.77 1.19 2.46 2.46 0 0 0 3.36.96 2.47 2.47 0 0 1 .73-1.54c-2.55-.29-5.23-1.27-5.23-5.63a4.41 4.41 0 0 1 1.17-3.05 4.1 4.1 0 0 1 .11-3.01s.96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0C17.9 5.09 18.86 5.4 18.86 5.4a4.1 4.1 0 0 1 .11 3.01 4.41 4.41 0 0 1 1.17 3.05c0 4.37-2.69 5.34-5.25 5.62a2.77 2.77 0 0 1 .79 2.15v3.18c0 .31.2.67.8.56A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z" />
-      </svg>
-    </a>
-
+    <GithubLink link="https://github.com/andreoliveiraalves/vue-currency-selector" />
   </div>
 </template>
 
@@ -47,9 +39,10 @@ import Background from './components/Background.vue'
 import LangToggler from './components/LangToggler.vue'
 import CurrencySelect from './components/CurrencySelect.vue'
 import AmountInput from './components/AmountInput.vue'
+import GithubLink from './components/GithubLink.vue'
 
 export default {
-  components: { Background, LangToggler, CurrencySelect, AmountInput },
+  components: { Background, LangToggler, CurrencySelect, AmountInput, GithubLink },
   data() {
     return {
       amount: '',
@@ -79,12 +72,14 @@ export default {
     amount(newVal) {
       if (!this.conversionRate) return
       const val = parseFloat(newVal)
-      this.convertedAmountInput = isNaN(val) ? '' : (val * this.conversionRate).toFixed(2)
+      // Round the output to avoid long decimals
+      this.convertedAmountInput = isNaN(val) ? '' : String(Math.round((val * this.conversionRate) * 100) / 100)
     },
     convertedAmountInput(newVal) {
       if (!this.conversionRate) return
       const val = parseFloat(newVal)
-      this.amount = isNaN(val) ? '' : (val / this.conversionRate).toFixed(2)
+      // Round the output to avoid long decimals
+      this.amount = isNaN(val) ? '' : String(Math.round((val / this.conversionRate) * 100) / 100)
     }
   },
   methods: {
@@ -92,7 +87,7 @@ export default {
       if (this.fromCurrency === this.toCurrency) {
         this.conversionRate = 1
         this.convertedAmountInput = this.numericAmount
-          ? this.numericAmount.toFixed(2)
+          ? String(this.numericAmount) // Remove .toFixed(2)
           : ''
         return
       }
@@ -103,7 +98,7 @@ export default {
         const data = await res.json()
         this.conversionRate = data.rates[this.toCurrency] || null
         this.convertedAmountInput = this.numericAmount
-          ? (this.numericAmount * this.conversionRate).toFixed(2)
+          ? String(this.numericAmount * this.conversionRate) // Remove .toFixed(2)
           : ''
       } catch (err) {
         console.error('Error fetching rate:', err)
@@ -141,23 +136,6 @@ export default {
 </script>
 
 <style scoped>
-@media (max-width: 640px) {
-  .converter-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 2rem;
-  }
-
-  .input-block {
-    width: 100%;
-  }
-
-  .switch-btn {
-    transform: rotate(90deg);
-    align-self: center;
-  }
-}
-
 .main-container {
   position: relative;
   min-height: 100vh;
@@ -291,7 +269,6 @@ export default {
 .flag {
   scale: 1.5;
   border-radius: 1px;
-
 }
 
 .converter-group {
@@ -323,5 +300,35 @@ export default {
   height: 32px;
   fill: #ffffff;
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+@media (max-width: 640px) {
+  .title {
+    margin-top: 2vh;
+    margin-bottom: 4vh;
+  }
+
+  .converter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .input-block {
+    width: 100%;
+  }
+
+  .switch-btn {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+
+  .converter-group {
+    padding: 20px 10px !important
+  }
+
+  .flag-wrapper {
+    margin-top: 0;
+  }
 }
 </style>
