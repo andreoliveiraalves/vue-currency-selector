@@ -25,7 +25,7 @@ Um conversor de moedas simples e moderno construído com **Vue 3**, **Vite** e *
 ## 📦 Instalação
 
 ```bash
-git clone https://github.com/andreoliveiraalves/portfolio.git
-cd portfolio
+git clone https://github.com/andreoliveiraalves/vue-currency-selector.git
+cd vue-currency-selector
 npm install
 npm run dev
