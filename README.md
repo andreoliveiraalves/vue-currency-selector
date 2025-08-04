@@ -1,6 +1,6 @@
 # 🌍 Currency Converter
 
-Um conversor de moedas simples e moderno construído com **Vue 3**, **Vite** e **Bootstrap 5**, com suporte multilíngue (🇵🇹/🇬🇧) e bandeiras para cada moeda.
+Um conversor de moedas simples e moderno construído com **Vue 3**, **Vite** e **Bootstrap 5**, com suporte multilinguistico (🇵🇹/🇬🇧) e bandeiras para cada zona económica.
 
 
 🌐 Live Demo: https://minimalist-currency-converter.netlify.app/
